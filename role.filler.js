@@ -1,24 +1,27 @@
 const roleUtils = require('role.utils');
 
 
-const roleHarvester = {
+const roleFiller = {
     count: 3,
-    spawnPriority: 10,
+    spawnPriority: 2,
 
     getBodyParts: function(maxPower) {
         return roleUtils.firstPossibleParts(maxPower, [
-            [WORK, WORK, CARRY, MOVE, MOVE],
-            [WORK, CARRY, MOVE]
+            [CARRY, CARRY, CARRY, MOVE, MOVE, MOVE]
         ]);
     },
 
     spawnNeeded: function(room) {
-        return true;
+        const collectors = _.filter(room.find(FIND_MY_CREEPS), creep => {
+            return creep.memory.role === 'collector';
+        });
+
+        return collectors.length > 0;
     },
 
     run: function(creep) {
         if (creep.carry.energy < creep.carryCapacity) {
-            roleUtils.harvestClosestSource(creep);
+            roleUtils.withdrawClosestContainer(creep);
         } else {
             const targets = creep.room.find(FIND_STRUCTURES, {
                 filter: (structure) => {
@@ -30,11 +33,9 @@ const roleHarvester = {
                 if(creep.transfer(closestTarget, RESOURCE_ENERGY) === ERR_NOT_IN_RANGE) {
                     creep.moveTo(closestTarget);
                 }
-            } else {
-                creep.moveTo(Game.flags['Inactive area']);
             }
         }
     }
 }
 
-module.exports = roleHarvester;
+module.exports = roleFiller;

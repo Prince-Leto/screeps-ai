@@ -2,6 +2,9 @@ const roleHarvester = require('role.harvester');
 const roleUpgrader = require('role.upgrader');
 const roleRepairer = require('role.repairer');
 const roleBuilder = require('role.builder');
+const roleCollector = require('role.collector');
+const roleFiller = require('role.filler');
+const roleLazyUpgrader = require('role.lazyUpgrader');
 
 
 const creepManager = {
@@ -10,6 +13,9 @@ const creepManager = {
         'upgrader': roleUpgrader,
         'repairer': roleRepairer,
         'builder': roleBuilder,
+        'collector': roleCollector,
+        'filler': roleFiller,
+        'layzUpgrader': roleLazyUpgrader,
     },
 
     run: function(room) {

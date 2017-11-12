@@ -6,7 +6,9 @@ const roleRepairer = {
     spawnPriority: 3,
 
     getBodyParts: function(maxPower) {
-        return [WORK, CARRY, MOVE];
+        return roleUtils.firstPossibleParts(maxPower, [
+            [WORK, CARRY, MOVE]
+        ]);
     },
 
     spawnNeeded: function(room) {

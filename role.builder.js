@@ -2,15 +2,14 @@ const roleUtils = require('role.utils');
 
 
 const roleBuilder = {
-    count: 2,
+    count: 3,
     spawnPriority: 2,
 
     getBodyParts: function(maxPower) {
-        if (maxPower >= 300) {
-            return [WORK, WORK, CARRY, CARRY, MOVE, MOVE];
-        }
-
-        return [WORK, CARRY, MOVE];
+        return roleUtils.firstPossibleParts(maxPower, [
+            [WORK, WORK, CARRY, CARRY, MOVE, MOVE],
+            [WORK, CARRY, MOVE]
+        ]);
     },
 
     spawnNeeded: function(room) {

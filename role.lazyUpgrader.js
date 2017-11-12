@@ -1,25 +1,28 @@
 const roleUtils = require('role.utils');
 
 
-const roleUpgrader = {
-    count: 4,
-    spawnPriority: 0,
+const roleLazyUpgrader = {
+    count: 5,
+    spawnPriority: 1,
 
     getBodyParts: function(maxPower) {
         return roleUtils.firstPossibleParts(maxPower, [
-            [WORK, WORK, CARRY, CARRY, MOVE, MOVE],
-            [WORK, CARRY, MOVE]
+            [WORK, WORK, CARRY, CARRY, MOVE, MOVE]
         ]);
     },
 
     spawnNeeded: function(room) {
-        return true;
+        const collectors = _.filter(room.find(FIND_MY_CREEPS), creep => {
+            return creep.memory.role === 'collector';
+        });
+
+        return collectors.length > 0;
     },
 
     run: function(creep) {
         if (creep.memory.working && creep.carry.energy === 0) {
             creep.memory.working = false;
-            creep.say('🔄 harvest');
+            creep.say('🔄 refill');
         }
         if (!creep.memory.working && creep.carry.energy === creep.carryCapacity) {
             creep.memory.working = true;
@@ -36,9 +39,9 @@ const roleUpgrader = {
             }
         }
         else {
-            roleUtils.harvestClosestSource(creep);
+            roleUtils.withdrawClosestContainer(creep);
         }
     }
 }
 
-module.exports = roleUpgrader;
+module.exports = roleLazyUpgrader;
