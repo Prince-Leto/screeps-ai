@@ -20,7 +20,7 @@ const roleFiller = {
     },
 
     run: function(creep) {
-        if (creep.carry.energy < creep.carryCapacity) {
+        if (creep.carry.energy === 0) {
             roleUtils.withdrawClosestContainer(creep);
         } else {
             const targets = creep.room.find(FIND_STRUCTURES, {

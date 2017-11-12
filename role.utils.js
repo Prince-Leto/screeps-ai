@@ -22,17 +22,18 @@ var roleUtils = {
 
     computeNeededEnergy: function(bodyParts) {
         // FROM: http://docs.screeps.com/api/#Creep
-        const costs = {};
-        costs[WORK] = 100;
-        costs[CARRY] = 50;
-        costs[MOVE] = 50;
-        costs[ATTACK] = 80;
-        costs[RANGED_ATTACK] = 150;
-        costs[HEAL] = 250;
-        costs[CLAIM] = 600;
-        costs[TOUGH] = 10;
+        const costs = {
+            [WORK]: 100,
+            [CARRY]: 50,
+            [MOVE]: 50,
+            [ATTACK]: 80,
+            [RANGED_ATTACK]: 150,
+            [HEAL]: 250,
+            [CLAIM]: 600,
+            [TOUGH]: 10
+        };
 
-        _.sum(bodyParts, o => costs[o]);
+        return _.sum(bodyParts, o => costs[o]);
     },
 
     firstPossibleParts: function(maxPower, bodyPartsArray) {

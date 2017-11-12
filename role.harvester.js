@@ -3,7 +3,7 @@ const roleUtils = require('role.utils');
 
 const roleHarvester = {
     count: 3,
-    spawnPriority: 10,
+    spawnPriority: 15,
 
     getBodyParts: function(maxPower) {
         return roleUtils.firstPossibleParts(maxPower, [

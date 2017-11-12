@@ -2,8 +2,8 @@ const roleUtils = require('role.utils');
 
 
 const roleRepairer = {
-    count: 2,
-    spawnPriority: 3,
+    count: 1,
+    spawnPriority: 4,
 
     getBodyParts: function(maxPower) {
         return roleUtils.firstPossibleParts(maxPower, [

@@ -3,7 +3,7 @@ const roleUtils = require('role.utils');
 
 const roleCollector = {
     count: 1,
-    spawnPriority: 15,
+    spawnPriority: 10,
 
     getBodyParts: function(maxPower) {
         return roleUtils.firstPossibleParts(maxPower, [
